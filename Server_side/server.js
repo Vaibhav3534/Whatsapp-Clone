@@ -33,7 +33,8 @@ db.once("open", () => {
          pusher.trigger('messages', 'inserted',{
             name: messageDetails.name,
             message: messageDetails.message,
-            timestamp:messageDetails.timestamp
+            timestamp:messageDetails.timestamp,
+            received: messageDetails.received
          })
       }else{
          console.log("Error in triggering Pusher")
@@ -56,11 +57,14 @@ app.use(cors())
 //--------------------------------**----------------------//
 
 //DB configs -- connection
-mongoose.connect("mongodb+srv://vaibhav:vaibhav123@cluster0.nwofbmh.mongodb.net/whatsapp?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://vaibhav:vaibhav123@cluster0.ouo8qkf.mongodb.net/?retryWrites=true&w=majority", {
 
 })
    .then((res) => {
       console.log("Connection Succcessfull")
+   })
+   .catch((err)=>{
+      console.log("error in connecting database")
    })
 
 app.get("/", (req, res) => {
